@@ -59,8 +59,8 @@ from diffusers.utils.import_utils import is_xformers_available
 from diffusers.utils.torch_utils import is_compiled_module
 
 
-if is_wandb_available():
-    import wandb
+import wandb
+wandb.login()
 
 # Will error if the minimal version of diffusers is not installed. Remove at your own risks.
 check_min_version("0.27.0.dev0")
@@ -99,7 +99,7 @@ DreamBooth for the text encoder was enabled: {train_text_encoder}.
         base_model=base_model,
         prompt=prompt,
         model_description=model_description,
-        inference=True,
+        inference=True
     )
 
     tags = ["text-to-image", "dreambooth"]

@@ -3,3 +3,6 @@ pillow
 transformers
 accelerate
 bitsandbytes
+xformers
+peft
+wandb

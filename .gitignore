@@ -164,3 +164,4 @@ data/input/images/*
 data/output/*
 data/source/*
 tmp/
+wandb/
