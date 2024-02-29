@@ -11,3 +11,4 @@ ftfy
 regex 
 opencv-python
 scikit-image
+datasets
