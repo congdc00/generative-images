@@ -3,6 +3,11 @@ pillow
 transformers
 accelerate
 bitsandbytes
-xformers
+xformers==0.0.25.dev747
 peft
 wandb
+diffuser
+ftfy 
+regex 
+opencv-python
+scikit-image

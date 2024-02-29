@@ -25,7 +25,7 @@ model = LlavaForConditionalGeneration.from_pretrained(
 transformers.logging.set_verbosity_error()
 
 SRC_DATA = "data/input/images/processed/house/best_quality"
-DST_DATA = "data/input/images/train/"
+DST_DATA = "data/input/images/test/"
 def predict_label(image):
     prompt = "USER: <image>\nDescribe this image as prompt.\nASSISTANT:"
     processor = AutoProcessor.from_pretrained(model_id)
@@ -46,6 +46,9 @@ if __name__ == "__main__":
         print(folder)
         for src_img_path in list_img_path:
             image = Image.open(src_img_path)
+            import time
+            start_time = time.time()
+            
             result = predict_label(image)
             result = result.lower()
             result = result.replace("\n", "")
