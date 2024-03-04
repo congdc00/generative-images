@@ -5,8 +5,8 @@ import torch.nn as nn
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)
 
-image1 = "dog.jpeg"
-image2= "test.jpg"
+image1 = "data/test/test_1.jpg"
+image2= "data/test/test_4.jpg"
 
 cos = torch.nn.CosineSimilarity(dim=0)
 

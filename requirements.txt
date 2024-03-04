@@ -12,3 +12,5 @@ regex
 opencv-python
 scikit-image
 datasets
+google-api-python-client
+pythumb
