@@ -14,6 +14,9 @@ python 3.10
 
 ## RUN
 
+'cài diffuser bản mới nhất"
+`pip install git+https://github.com/huggingface/diffusers``
+
 `export MODEL_NAME="runwayml/stable-diffusion-v1-5"
 export DATASET_NAME="path/to/dataset"
 export OUTPUT_DIR="path/to/checkpoint"`
@@ -28,22 +31,22 @@ export OUTPUT_DIR="path/to/checkpoint"`
 
 ### Loras
 
-`accelerate launch --mixed_precision="fp16"  train_text_to_image_lora.py \  
-  --pretrained_model_name_or_path=$MODEL_NAME \  
-  --dataset_name=$DATASET_NAME \
-  --dataloader_num_workers=8 \
-  --resolution=1280 \
-  --center_crop \
-  --random_flip \
-  --train_batch_size=2 \
-  --gradient_accumulation_steps=4 \
-  --max_train_steps=15000 \
-  --learning_rate=1e-04 \
-  --max_grad_norm=1 \
-  --lr_scheduler="cosine" \
-  --lr_warmup_steps=0 \
-  --output_dir=${OUTPUT_DIR} \
-  --report_to=wandb \
-  --checkpointing_steps=500 \
-  --validation_prompt="a cozy house" \
-  --seed=1337`
+`accelerate launch train_dreambooth_lora_sdxl.py \
+ --pretrained_model_name_or_path=$MODEL_NAME  \
+  --instance_data_dir=$INSTANCE_DIR \
+ --pretrained_vae_model_name_or_path=$VAE_PATH \
+  --output_dir=$OUTPUT_DIR \
+ --mixed_precision="fp16" \
+ --instance_prompt="a cozy house, in house" \
+ --resolution=1024 \
+ --train_batch_size=1\
+ --gradient_accumulation_steps=8 \
+ --learning_rate=1e-4 \
+ --report_to="wandb" \
+ --lr_scheduler="constant" \
+ --lr_warmup_steps=0 \
+ --max_train_steps=2000 \
+ --validation_prompt="a cozy house, in house, the image depicts a spacious and well-lit living room with a fireplace, the room features a large tv mounted on the wall, and a comfortable couch is placed in the background, there are several chairs scattered throughout the room, and a dining table is located near the center,in addition to the furniture, the living room is adorned with various decorative elements, such as a potted plant, a vase, and a bowl, there are also multiple books placed around the room, adding to the cozy atmosphere, the room is further enhanced by the presence of a fireplace, which creates a warm and inviting ambiance" \
+ --validation_epochs=50 \
+ --seed="0"
+`
