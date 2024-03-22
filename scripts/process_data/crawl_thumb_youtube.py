@@ -5,6 +5,7 @@ from tqdm import tqdm
 import requests
 import os
 # config
+from loguru import logger
 api_key='AIzaSyArrDaKne-G_649UGiN3sMCq6F25xzTUQk'
 file_path = 'data/input/source/YoutubeChannels.txt'
 SAVE_DATA_PATH = "data/input/images/raw_images/thumb-youtube"
@@ -88,6 +89,8 @@ if __name__ == "__main__":
         if "@" in channel:
             channel = channel[1:]
             type_name = "name"
+        elif channel == "":
+            break
         elif channel[0] == "#":
             continue
         else:
@@ -108,5 +111,5 @@ if __name__ == "__main__":
                 t.save(f'{folder_path}')
             except:
                 continue
-    # for channel in tqdm(list_channel):
-    #     
+
+    logger.info("Crawl done")

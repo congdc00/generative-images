@@ -4,7 +4,7 @@ from diffusers import AutoencoderTiny, StableDiffusionPipeline
 from streamdiffusion import StreamDiffusion
 from streamdiffusion.image_utils import postprocess_image
 
-pipe = StableDiffusionPipeline.from_pretrained("SG161222/RealVisXL_V3.0").to(
+pipe = StableDiffusionPipeline.from_pretrained("./data/premodel/animagine-xl-3.1").to(
     device=torch.device("cuda"),
     dtype=torch.float16,
 )

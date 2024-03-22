@@ -1,4 +1,10 @@
-#cozy-house
+# see side 
+@MelodicJazzMosaic
+@CalmWave86
+@SeasideCafeJazzCafe
+@ChilloutSeasideCafe
+
+# cozy-house
 @coffeeandjazzmusic
 @cozycoffeeshop1956
 @JazzyCafe
@@ -13,11 +19,12 @@ UCvJ_sQ4ZcRgzCqHvBySGgCA
 UCABGyuEljSfzF13AtoSBWLQ
 UCkuN7rEt-ZQl_7lcd9zTchg
 
-#model-house
+# model-house
 @cozybedroom7838
 @jazzycoffee2343
 @jazzbedroommusic
 @cozyapartment6988
+
 
 #2D
 @LofiGirl

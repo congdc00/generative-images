@@ -23,7 +23,7 @@ export OUTPUT_DIR="path/to/checkpoint"`
 
 ### Dreambooth
 
-`CUDA_VISIBLE_DEVICES=1 accelerate launch train_dreambooth.py   --pretrained_model_name_or_path=$MODEL_NAME --instance_data_dir=$INSTANCE_DIR   --output_dir=$OUTPUT_DIR   --instance_prompt="a photo of CONGDC bedroom, warm light" --resolution=1280   --train_batch_size=1   --gradient_accumulation_steps=1   --learning_rate=5e-6   --lr_scheduler="constant" --lr_warmup_steps=0 --max_train_steps=4000 --use_8bit_adam --gradient_checkpointing --enable_xformers_memory_efficient_attention --set_grads_to_none --num_validation_images=100 --validation_steps=100 --validation_prompt="a photo of CONGDC bedroom, warm light"`
+`CUDA_VISIBLE_DEVICES=1 accelerate launch train_dreambooth.py --pretrained_model_name_or_path="runwayml/stable-diffusion-v1-5" --instance_data_dir="data/cozy-house_all/" --output_dir="checkpoints_dreambooth/" --instance_prompt="a cozy house" --resolution=512 --train_batch_size=12 --gradient_accumulation_steps=4 --learning_rate=5e-6 --lr_scheduler="constant" --lr_warmup_steps=0 --max_train_steps=500 --use_8bit_adam --gradient_checkpointing --num_validation_images=20 --validation_steps=100 --validation_prompt="the image features a bedroom with a large window, providing a stunning view of the city at night, the bed is positioned in front of the window, and there are several lit candles scattered around the room, creating a cozy and intimate atmosphere, the room also contains a fireplace, adding warmth and ambiance to the space, the combination of the lit candles, the city view, and the fireplace creates a serene and inviting environment" --report_to "wandb"`
 
 ### Stable-Diffusion
 
@@ -31,22 +31,4 @@ export OUTPUT_DIR="path/to/checkpoint"`
 
 ### Loras
 
-`accelerate launch train_dreambooth_lora_sdxl.py \
- --pretrained_model_name_or_path=$MODEL_NAME  \
-  --instance_data_dir=$INSTANCE_DIR \
- --pretrained_vae_model_name_or_path=$VAE_PATH \
-  --output_dir=$OUTPUT_DIR \
- --mixed_precision="fp16" \
- --instance_prompt="a cozy house, in house" \
- --resolution=1024 \
- --train_batch_size=1\
- --gradient_accumulation_steps=8 \
- --learning_rate=1e-4 \
- --report_to="wandb" \
- --lr_scheduler="constant" \
- --lr_warmup_steps=0 \
- --max_train_steps=2000 \
- --validation_prompt="a cozy house, in house, the image depicts a spacious and well-lit living room with a fireplace, the room features a large tv mounted on the wall, and a comfortable couch is placed in the background, there are several chairs scattered throughout the room, and a dining table is located near the center,in addition to the furniture, the living room is adorned with various decorative elements, such as a potted plant, a vase, and a bowl, there are also multiple books placed around the room, adding to the cozy atmosphere, the room is further enhanced by the presence of a fireplace, which creates a warm and inviting ambiance" \
- --validation_epochs=50 \
- --seed="0"
-`
+` accelerate launch train_loras.py --pretrained_model_name_or_path="stabilityai/stable-diffusion-xl-base-1.0" --dataset_name="data/cozy-house_all" --dataloader_num_workers=2 --resolution=1024 --center_crop --random_flip --train_batch_size=1 --gradient_accumulation_steps=4 --max_train_steps=500 --learning_rate=1e-04 --max_grad_norm=1 --lr_scheduler="cosine" --lr_warmup_steps=0 --output_dir="checkpoints_lora_sdxl" --report_to=wandb --checkpointing_steps=250 --validation_prompt="The image depicts a cozy and warm interior of a room, possibly a library or a personal study. The room is adorned with wooden shelves filled with books, a large window that offers a view of a snowy landscape outside, and a comfortable seating area with cushions and a table. There's also a fireplace with a roaring fire, and various decorative items like candles, a fish tank, and a neon sign that reads 'Jolly Cafe'. The ambiance is enhanced by the soft glow of lights and the presence of a few pets, including a cat and a dog, adding to the homely feel"`
